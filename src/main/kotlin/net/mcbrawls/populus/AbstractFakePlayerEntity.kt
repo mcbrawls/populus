@@ -51,12 +51,22 @@ abstract class AbstractFakePlayerEntity(type: EntityType<out AbstractFakePlayerE
      */
     val defaultProfileName: String by lazy { uuid.toString().substring(0..<16) }
 
-    init {
-        val elements = createNameAttachmentElement()
+    private var nameElementAttachment: EntityAttachment? = null
 
+    init {
+        refreshNameElements()
+    }
+
+    /**
+     * Refreshes attached elements.
+     */
+    fun refreshNameElements() {
+        nameElementAttachment?.destroy()
+
+        val elements = createNameAttachmentElement()
         val holder = ElementHolder()
         elements.forEach(holder::addPassengerElement)
-        EntityAttachment.ofTicking(holder, this)
+        nameElementAttachment = EntityAttachment.ofTicking(holder, this)
     }
 
     /**
