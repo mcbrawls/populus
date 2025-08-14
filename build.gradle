@@ -124,12 +124,12 @@ publishing {
 
     repositories {
         def env = System.getenv()
+        def mavenUrl = env["mavenUrl"]
         def mavenUsername = env["mavenUsername"]
         def mavenPassword = env["mavenPassword"]
-        if (mavenUsername && mavenPassword) {
+        if (mavenUrl && mavenUsername && mavenPassword) {
             maven {
-                name = "brawls"
-                url  = "https://maven.mcbrawls.net/releases/"
+                url = mavenUrl
                 credentials.username = mavenUsername
                 credentials.password = mavenPassword
             }
