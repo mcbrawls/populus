@@ -1,0 +1,34 @@
+{
+	"schemaVersion": 1,
+	"id": "populus",
+	"version": "${version}",
+	"name": "Populus",
+	"description": "A library for creating fake players.",
+	"authors": [
+		"Andante"
+	],
+	"contact": {
+		"sources": "https://github.com/mcbrawls/populus"
+	},
+	"license": "MIT",
+	"icon": "assets/populus/icon.png",
+	"environment": "*",
+	"mixins": [
+		"populus.mixins.json"
+	],
+	"entrypoints": {
+		"main": [
+			{
+				"adapter": "kotlin",
+				"value": "net.mcbrawls.populus.Populus"
+			}
+		]
+	},
+	"accessWidener": "populus.accesswidener",
+	"depends": {
+		"fabricloader": "*",
+		"minecraft": "~1.21.3",
+		"fabric-api": "*",
+		"fabric-language-kotlin": "*"
+	}
+}
