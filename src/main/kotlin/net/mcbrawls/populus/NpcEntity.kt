@@ -17,7 +17,7 @@ class NpcEntity(type: EntityType<NpcEntity>, world: World) : AbstractFakePlayerE
 
     override fun createDisplayNameText(): List<Text> {
         val name = createProfileName()
-        return listOf(Text.literal("Fake ($name)"))
+        return listOf(Text.literal("NPC"), Text.literal(name))
     }
 
     companion object {
