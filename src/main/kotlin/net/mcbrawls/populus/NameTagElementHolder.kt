@@ -61,12 +61,12 @@ class NameTagElementHolder(val elementFactory: (TextDisplayElement) -> Unit = {}
     }
 
     fun refreshElements() {
-        elements.forEach(::removeElement)
-        attachedPassengerEntityIds.clear()
-
-        if (attachedPassengerEntityIds.isEmpty()) {
-            val elements = createElements()
-            elements.forEach(::addPassengerElement)
+        elements.forEach { element ->
+            removeElement(element)
+            attachedPassengerEntityIds.removeAll(element.entityIds)
         }
+
+        val elements = createElements()
+        elements.forEach(::addPassengerElement)
     }
 }
