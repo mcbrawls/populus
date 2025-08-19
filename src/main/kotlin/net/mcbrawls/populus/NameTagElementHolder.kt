@@ -7,7 +7,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.math.AffineTransformation
 import org.joml.Vector3f
 
-class NameTagElementHolder : ElementHolder() {
+class NameTagElementHolder(val elementFactory: (TextDisplayElement) -> Unit = {}) : ElementHolder() {
     /**
      * The base name tag offset from the passenger position.
      */
@@ -53,6 +53,8 @@ class NameTagElementHolder : ElementHolder() {
 
             element.billboardMode = DisplayEntity.BillboardMode.CENTER
             element.teleportDuration = 1
+
+            elementFactory.invoke(element)
 
             element
         }
