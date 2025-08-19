@@ -59,7 +59,8 @@ class NameTagElementHolder : ElementHolder() {
     }
 
     fun refreshElements() {
-        entityIds.forEach(attachedPassengerEntityIds::removeInt)
+        elements.forEach(::removeElement)
+        attachedPassengerEntityIds.clear()
 
         if (attachedPassengerEntityIds.isEmpty()) {
             val elements = createElements()
