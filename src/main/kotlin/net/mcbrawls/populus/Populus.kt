@@ -22,7 +22,7 @@ object Populus : ModInitializer {
         EntityType.Builder.create(::NpcEntity, SpawnGroup.MISC)
             .dimensions(0.6F, 1.8F)
             .eyeHeight(1.62F)
-            .vehicleAttachment(PlayerEntity.VEHICLE_ATTACHMENT_POS)
+            .vehicleAttachment(PlayerEntity.VEHICLE_ATTACHMENT)
             .maxTrackingRange(32)
             .trackingTickInterval(2)
         )

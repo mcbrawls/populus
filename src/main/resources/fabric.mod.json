@@ -27,7 +27,7 @@
 	"accessWidener": "populus.accesswidener",
 	"depends": {
 		"fabricloader": "*",
-		"minecraft": "~1.21.8",
+		"minecraft": "~1.21.10",
 		"fabric-api": "*",
 		"fabric-language-kotlin": "*",
 		"polymer-core": "*",

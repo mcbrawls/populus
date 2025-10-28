@@ -1,13 +1,15 @@
 package net.mcbrawls.populus
 
+import com.google.common.collect.ImmutableMultimap
 import com.mojang.authlib.GameProfile
 import com.mojang.authlib.properties.Property
+import com.mojang.authlib.properties.PropertyMap
 import eu.pb4.polymer.core.api.entity.PolymerEntity
 import eu.pb4.polymer.virtualentity.api.attachment.EntityAttachment
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.PlayerLikeEntity
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.mob.PathAwareEntity
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.network.packet.Packet
 import net.minecraft.network.packet.s2c.play.PlayerListS2CPacket
 import net.minecraft.network.packet.s2c.play.PlayerRemoveS2CPacket
@@ -93,11 +95,13 @@ abstract class AbstractFakePlayerEntity(type: EntityType<out AbstractFakePlayerE
      */
     open fun createProfile(): GameProfile {
         val name = createProfileName()
-        return GameProfile(uuid, name).apply {
-            skinData?.also { data ->
-                properties.put("textures", Property("textures", data.value, data.signature))
-            }
-        }
+        return GameProfile(uuid, name, skinData?.let { data ->
+            PropertyMap(
+                ImmutableMultimap.of(
+                    "textures", Property("textures", data.value, data.signature)
+                )
+            )
+        } ?: PropertyMap.EMPTY)
     }
 
     override fun onBeforeSpawnPacket(player: ServerPlayerEntity, consumer: Consumer<Packet<*>>) {
@@ -113,7 +117,7 @@ abstract class AbstractFakePlayerEntity(type: EntityType<out AbstractFakePlayerE
     override fun modifyRawTrackedData(entries: MutableList<DataTracker.SerializedEntry<*>>, player: ServerPlayerEntity, initial: Boolean) {
         // add model part data
         if (initial) {
-            entries.add(DataTracker.SerializedEntry.of(PlayerEntity.PLAYER_MODEL_PARTS, modelParts))
+            entries.add(DataTracker.SerializedEntry.of(PlayerLikeEntity.PLAYER_MODE_CUSTOMIZATION_ID, modelParts))
         }
     }
 
