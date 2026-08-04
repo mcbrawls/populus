@@ -1,5 +1,5 @@
 plugins {
-    id "fabric-loom" version "1.11-SNAPSHOT"
+    id "fabric-loom" version "1.16-SNAPSHOT"
     id "org.jetbrains.kotlin.jvm"
     id "maven-publish"
 }
@@ -21,6 +21,10 @@ repositories {
         name = "Nucleoid"
         url  = "https://maven.nucleoid.xyz/"
     }
+}
+
+test {
+    failOnNoDiscoveredTests = false
 }
 
 sourceSets {
